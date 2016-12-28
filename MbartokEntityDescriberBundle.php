@@ -4,6 +4,6 @@ namespace mbartok\EntityDescriberBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class EntityDescriberBundle extends Bundle
+class MbartokEntityDescriberBundle extends Bundle
 {
 }
