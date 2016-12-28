@@ -4,7 +4,7 @@ services:
         arguments:
             - "@mbartok_entity_describer.discovery"
     mbartok_entity_describer.discovery:
-        class: mbartok\EntityDescriberBundle\Manager\EntityDescriberDiscovery
+        class: mbartok\EntityDescriberBundle\Discovery\EntityDescriberDiscovery
         arguments:
             - "%mbartok_entity_describer.namespace%"
             - "%mbartok_entity_describer.directory%"
