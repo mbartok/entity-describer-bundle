@@ -2,44 +2,51 @@
 
 namespace mbartok\EntityDescriberBundle\Manager;
 
-use mbartok\EntityDescriberBundle\Discovery\EntityDescriberDiscovery;
+use mbartok\EntityDescriberBundle\Model\Describable;
+use mbartok\EntityDescriberBundle\Model\EntityDescriber;
 
 class EntityDescriberManager
 {
-    /**
-     * @var EntityDescriberDiscovery
-     */
-    private $discovery;
+    private $describers;
 
-    public function __construct(EntityDescriberDiscovery $discovery)
+    public function __construct()
     {
-        $this->discovery = $discovery;
+        $this->describers = array();
+    }
+
+    public function addDescriber(EntityDescriber $describer, $class)
+    {
+        $this->describers[$class] = $describer;
     }
 
     /**
      * Returns a list of available describers.
      *
-     * @return array
+     * @return EntityDescriber[]
      */
     public function getDescribers()
     {
-        return $this->discovery->getDescribers();
+        return $this->describers;
     }
 
     /**
      * Returns one worker by class name
      *
-     * @param $className
-     * @return array
+     * @param string $className
+     * @return EntityDescriber
      *
      * @throws \Exception
      */
-    public function getDescriber($className)
+    public function getDescriberByClassName($className)
     {
-        $describers = $this->discovery->getDescribers();
-        if (isset($describers[$className])) {
-            return $describers[$className];
+        if (array_key_exists($className, $this->describers)) {
+            return $this->describers[$className];
         }
         throw new \Exception('Entity describer for ' . $className . ' not found.');
+    }
+
+    public function getDescriberByClass(Describable $describable)
+    {
+        return $this->getDescriberByClassName(get_class($describable));
     }
 }

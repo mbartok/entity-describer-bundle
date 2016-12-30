@@ -3,7 +3,7 @@
 namespace mbartok\EntityDescriberBundle\Twig;
 
 use mbartok\EntityDescriberBundle\Manager\EntityDescriberManager;
-use mbartok\EntityDescriberBundle\Model\EntityDescriberInterface;
+use mbartok\EntityDescriberBundle\Model\Describable;
 use Symfony\Component\Routing\Router;
 
 class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extension_InitRuntimeInterface
@@ -48,23 +48,13 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         );
     }
 
-    /**
-     * @param $entity
-     * @return EntityDescriberInterface
-     */
-    private function getDescriber($entity)
-    {
-        $describer = $this->manager->getDescriber(get_class($entity));
-        return $describer['describer'];
-    }
-
-    public function entityDetailPath($entity, array $params = [])
+    public function entityDetailPath(Describable $entity = null, array $params = [])
     {
         if ($entity === null) {
             return '';
         }
-        $describer = $this->getDescriber($entity);
-        return $this->router->generate($describer->getRouteName(), array_merge($describer->getRouteParams(), $params));
+        $describer = $this->manager->getDescriberByClass($entity);
+        return $this->router->generate($describer->getRouteName($entity), array_merge($describer->getRouteParams($entity), $params));
     }
 
     public function entityLabel($entity)
@@ -72,7 +62,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         if ($entity === null) {
             return '';
         }
-        $describer = $this->getDescriber($entity);
-        return $describer->getLabel();
+        $describer = $this->manager->getDescriberByClass($entity);
+        return $describer->getLabel($entity);
     }
 }

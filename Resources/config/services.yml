@@ -1,15 +1,6 @@
 services:
     mbartok_entity_describer.manager:
         class: mbartok\EntityDescriberBundle\Manager\EntityDescriberManager
-        arguments:
-            - "@mbartok_entity_describer.discovery"
-    mbartok_entity_describer.discovery:
-        class: mbartok\EntityDescriberBundle\Discovery\EntityDescriberDiscovery
-        arguments:
-            - "%mbartok_entity_describer.namespace%"
-            - "%mbartok_entity_describer.directory%"
-            - "%kernel.root_dir%"
-            - "@annotation_reader"
     mbartok_entity_describer.twig.entity_describer:
         class: mbartok\EntityDescriberBundle\Twig\EntityDescriberExtension
         arguments:
