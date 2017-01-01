@@ -18,10 +18,16 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
      */
     private $router;
 
-    public function __construct(EntityDescriberManager $manager, Router $router)
+    /**
+     * @var string
+     */
+    private $template;
+
+    public function __construct(EntityDescriberManager $manager, Router $router, $template)
     {
         $this->manager = $manager;
         $this->router = $router;
+        $this->template = $template;
     }
 
     /**
@@ -33,7 +39,6 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
     }
 
     /**
-     *
      * @see Twig_Extension::getFunctions()
      */
     public function getFunctions()
@@ -44,6 +49,14 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
             )),
             new \Twig_SimpleFunction('entityLabel', array($this, 'entityLabel'), array(
                 'is_safe' => array('html')
+            )),
+            new \Twig_SimpleFunction('entityActionDropdown', array($this, 'entityActionDropdown'), array(
+                'is_safe' => array('html'),
+                'needs_environment' => true
+            )),
+            new \Twig_SimpleFunction('entityActionButtons', array($this, 'entityActionButtons'), array(
+                'is_safe' => array('html'),
+                'needs_environment' => true
             ))
         );
     }
@@ -57,12 +70,38 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         return $this->router->generate($describer->getRouteName($entity), array_merge($describer->getRouteParams($entity), $params));
     }
 
-    public function entityLabel($entity)
+    public function entityLabel(Describable $entity)
     {
         if ($entity === null) {
             return '';
         }
         $describer = $this->manager->getDescriberByClass($entity);
         return $describer->getLabel($entity);
+    }
+
+    public function entityActionDropdown(\Twig_Environment $twig, Describable $entity)
+    {
+        if ($entity === null) {
+            return '';
+        }
+        $describer = $this->manager->getDescriberByClass($entity);
+        $renderer = $twig->load($this->template);
+        return $renderer->renderBlock('dropdown', array(
+            'entity' => $entity,
+            'actions' => $describer->getActions($entity)
+        ));
+    }
+
+    public function entityActionButtons(\Twig_Environment $twig, Describable $entity)
+    {
+        if ($entity === null) {
+            return '';
+        }
+        $describer = $this->manager->getDescriberByClass($entity);
+        $renderer = $twig->load($this->template);
+        return $renderer->renderBlock('buttons', array(
+            'entity' => $entity,
+            'actions' => $describer->getActions($entity)
+        ));
     }
 }

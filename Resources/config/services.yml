@@ -6,5 +6,6 @@ services:
         arguments:
             - "@mbartok_entity_describer.manager"
             - "@router"
+            - "%mbartok.entity_describer.template%"
         tags:
             - { name: twig.extension }
