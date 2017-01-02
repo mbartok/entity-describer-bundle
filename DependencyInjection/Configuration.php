@@ -15,7 +15,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->scalarNode('template')
-            ->defaultValue('MbartokEntityDescriberBundle:mbartok_entity_describer_items.html.twig')
+            ->defaultValue('mbartok_entity_describer_items.html.twig')
             ->end();
 
         return $treeBuilder;

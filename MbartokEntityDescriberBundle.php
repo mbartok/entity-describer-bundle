@@ -4,6 +4,7 @@ namespace mbartok\EntityDescriberBundle;
 
 use mbartok\EntityDescriberBundle\DependencyInjection\Compiler\AddEntityDescriberCompilerPass;
 use mbartok\EntityDescriberBundle\DependencyInjection\Compiler\AddExtensionsPass;
+use mbartok\EntityDescriberBundle\DependencyInjection\Compiler\AddTemplatePathPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -13,5 +14,6 @@ class MbartokEntityDescriberBundle extends Bundle
     {
         $container->addCompilerPass(new AddEntityDescriberCompilerPass());
         $container->addCompilerPass(new AddExtensionsPass());
+        $container->addCompilerPass(new AddTemplatePathPass());
     }
 }
