@@ -55,6 +55,17 @@ interface ActionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
     public function setRouteParams(array $params);
 
     /**
+     * @param string $color
+     * @return ActionInterface
+     */
+    public function setColor($color);
+
+    /**
+     * @return string
+     */
+    public function getColor();
+
+    /**
      * Returns the label that will be used to render this item
      *
      * Defaults to the name of no label was specified
@@ -71,38 +82,6 @@ interface ActionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      * @return ActionInterface
      */
     public function setLabel($label);
-
-    /**
-     * @return array
-     */
-    public function getAttributes();
-
-    /**
-     * Provides a fluent interface
-     *
-     * @param array $attributes
-     *
-     * @return ActionInterface
-     */
-    public function setAttributes(array $attributes);
-
-    /**
-     * @param string $name The name of the attribute to return
-     * @param mixed $default The value to return if the attribute doesn't exist
-     *
-     * @return mixed
-     */
-    public function getAttribute($name, $default = null);
-
-    /**
-     * Provides a fluent interface
-     *
-     * @param string $name
-     * @param mixed $value
-     *
-     * @return ActionInterface
-     */
-    public function setAttribute($name, $value);
 
     /**
      * @return array

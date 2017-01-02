@@ -38,18 +38,6 @@ class Action implements ActionInterface
     protected $linkAttributes = array();
 
     /**
-     * Attributes for the item text
-     * @var array
-     */
-    protected $labelAttributes = array();
-
-    /**
-     * Attributes for the item
-     * @var array
-     */
-    protected $attributes = array();
-
-    /**
      * Whether the item is displayed
      * @var boolean
      */
@@ -77,6 +65,8 @@ class Action implements ActionInterface
      * @var ActionFactoryInterface
      */
     protected $factory;
+
+    protected $color = null;
 
     /**
      * Class constructor
@@ -144,34 +134,6 @@ class Action implements ActionInterface
     public function setLabel($label)
     {
         $this->label = $label;
-
-        return $this;
-    }
-
-    public function getAttributes()
-    {
-        return $this->attributes;
-    }
-
-    public function setAttributes(array $attributes)
-    {
-        $this->attributes = $attributes;
-
-        return $this;
-    }
-
-    public function getAttribute($name, $default = null)
-    {
-        if (isset($this->attributes[$name])) {
-            return $this->attributes[$name];
-        }
-
-        return $default;
-    }
-
-    public function setAttribute($name, $value)
-    {
-        $this->attributes[$name] = $value;
 
         return $this;
     }
@@ -448,5 +410,16 @@ class Action implements ActionInterface
     {
         $this->routeParams = $params;
         return $this;
+    }
+
+    public function setColor($color)
+    {
+        $this->color = $color;
+        return $this;
+    }
+
+    public function getColor()
+    {
+        return $this->color;
     }
 }

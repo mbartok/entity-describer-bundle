@@ -18,12 +18,12 @@ class CoreExtension implements ExtensionInterface
         return array_merge(
             array(
                 'route' => null,
-                'routeParams' => array(),
+                'params' => array(),
                 'label' => null,
-                'attributes' => array(),
                 'linkAttributes' => array(),
                 'display' => true,
                 'displayChildren' => true,
+                'color' => null
             ),
             $options
         );
@@ -39,11 +39,11 @@ class CoreExtension implements ExtensionInterface
     {
         $item
             ->setRouteName($options['route'])
-            ->setRouteParams($options['routeParams'])
+            ->setRouteParams($options['params'])
             ->setLabel($options['label'])
-            ->setAttributes($options['attributes'])
             ->setLinkAttributes($options['linkAttributes'])
             ->setDisplay($options['display'])
-            ->setDisplayChildren($options['displayChildren']);
+            ->setDisplayChildren($options['displayChildren'])
+            ->setColor($options['color']);
     }
 }
