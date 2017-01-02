@@ -3,6 +3,7 @@
 namespace mbartok\EntityDescriberBundle\Twig;
 
 use mbartok\EntityDescriberBundle\Manager\EntityDescriberManager;
+use mbartok\EntityDescriberBundle\Model\ActionInterface;
 use mbartok\EntityDescriberBundle\Model\Describable;
 use Symfony\Component\Routing\Router;
 
@@ -85,10 +86,14 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
             return '';
         }
         $describer = $this->manager->getDescriberByClass($entity);
+        $actionItem = $describer->getRootActionItem($entity);
+        if (!$actionItem instanceof ActionInterface) {
+            return '';
+        }
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_dropdown', array(
             'entity' => $entity,
-            'actions' => $describer->getActions($entity)
+            'actionItem' => $actionItem
         ));
     }
 
@@ -98,10 +103,14 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
             return '';
         }
         $describer = $this->manager->getDescriberByClass($entity);
+        $actionItem = $describer->getRootActionItem($entity);
+        if (!$actionItem instanceof ActionInterface) {
+            return '';
+        }
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_buttons', array(
             'entity' => $entity,
-            'actions' => $describer->getActions($entity)
+            'actionItem' => $actionItem
         ));
     }
 }

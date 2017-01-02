@@ -24,7 +24,7 @@ interface EntityDescriber
 
     /**
      * @param Describable $entity
-     * @return ActionInterface[]
+     * @return ActionInterface
      */
-    public function getActions(Describable $entity);
+    public function getRootActionItem(Describable $entity);
 }
