@@ -265,4 +265,35 @@ interface ActionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 
     public function getLastChild();
 
+    /**
+     * @return array
+     */
+    public function getExtras();
+
+    /**
+     * Provides a fluent interface
+     *
+     * @param array $extras
+     *
+     * @return ActionInterface
+     */
+    public function setExtras(array $extras);
+
+    /**
+     * @param string $name The name of the extra to return
+     * @param mixed $default The value to return if the extra doesn't exist
+     *
+     * @return mixed
+     */
+    public function getExtra($name, $default = null);
+
+    /**
+     * Provides a fluent interface
+     *
+     * @param string $name
+     * @param mixed $value
+     *
+     * @return ActionInterface
+     */
+    public function setExtra($name, $value);
 }

@@ -69,6 +69,12 @@ class Action implements ActionInterface
     protected $color = null;
 
     /**
+     * Extra stuff associated to the item
+     * @var array
+     */
+    protected $extras = array();
+
+    /**
      * Class constructor
      *
      * @param string $name The name of this menu, which is how its parent will
@@ -421,5 +427,33 @@ class Action implements ActionInterface
     public function getColor()
     {
         return $this->color;
+    }
+
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    public function setExtras(array $extras)
+    {
+        $this->extras = $extras;
+
+        return $this;
+    }
+
+    public function getExtra($name, $default = null)
+    {
+        if (isset($this->extras[$name])) {
+            return $this->extras[$name];
+        }
+
+        return $default;
+    }
+
+    public function setExtra($name, $value)
+    {
+        $this->extras[$name] = $value;
+
+        return $this;
     }
 }

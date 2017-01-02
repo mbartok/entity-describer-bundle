@@ -45,5 +45,23 @@ class CoreExtension implements ExtensionInterface
             ->setDisplay($options['display'])
             ->setDisplayChildren($options['displayChildren'])
             ->setColor($options['color']);
+
+        $this->buildExtras($item, $options);
+    }
+
+    /**
+     * Configures the newly created item's extras
+     * Extras are processed one by one in order not to reset values set by other extensions
+     *
+     * @param ActionInterface $item
+     * @param array $options
+     */
+    private function buildExtras(ActionInterface $item, array $options)
+    {
+        if (!empty($options['extras'])) {
+            foreach ($options['extras'] as $key => $value) {
+                $item->setExtra($key, $value);
+            }
+        }
     }
 }
