@@ -80,7 +80,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         return $describer->getLabel($entity);
     }
 
-    public function entityActionDropdown(\Twig_Environment $twig, Describable $entity)
+    public function entityActionDropdown(\Twig_Environment $twig, Describable $entity, array $options = array())
     {
         if ($entity === null) {
             return '';
@@ -93,11 +93,12 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_dropdown', array(
             'entity' => $entity,
-            'item' => $actionItem
+            'item' => $actionItem,
+            'options' => $options
         ));
     }
 
-    public function entityActionButtons(\Twig_Environment $twig, Describable $entity)
+    public function entityActionButtons(\Twig_Environment $twig, Describable $entity, array $options = array())
     {
         if ($entity === null) {
             return '';
@@ -110,7 +111,8 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_buttons', array(
             'entity' => $entity,
-            'item' => $actionItem
+            'item' => $actionItem,
+            'options' => $options
         ));
     }
 }
