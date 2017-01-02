@@ -93,7 +93,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_dropdown', array(
             'entity' => $entity,
-            'actionItem' => $actionItem
+            'item' => $actionItem
         ));
     }
 
@@ -110,7 +110,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         $renderer = $twig->load($this->template);
         return $renderer->renderBlock('action_buttons', array(
             'entity' => $entity,
-            'actionItem' => $actionItem
+            'item' => $actionItem
         ));
     }
 }
