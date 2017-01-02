@@ -23,7 +23,8 @@ class CoreExtension implements ExtensionInterface
                 'linkAttributes' => array(),
                 'display' => true,
                 'displayChildren' => true,
-                'color' => null
+                'color' => null,
+                'disabled' => false
             ),
             $options
         );
@@ -44,7 +45,8 @@ class CoreExtension implements ExtensionInterface
             ->setLinkAttributes($options['linkAttributes'])
             ->setDisplay($options['display'])
             ->setDisplayChildren($options['displayChildren'])
-            ->setColor($options['color']);
+            ->setColor($options['color'])
+            ->setDisabled($options['disabled']);
 
         $this->buildExtras($item, $options);
     }

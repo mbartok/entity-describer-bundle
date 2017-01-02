@@ -296,4 +296,8 @@ interface ActionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      * @return ActionInterface
      */
     public function setExtra($name, $value);
+
+    public function isDisabled();
+
+    public function setDisabled($bool);
 }

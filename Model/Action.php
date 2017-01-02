@@ -74,6 +74,8 @@ class Action implements ActionInterface
      */
     protected $extras = array();
 
+    protected $disabled = false;
+
     /**
      * Class constructor
      *
@@ -454,6 +456,17 @@ class Action implements ActionInterface
     {
         $this->extras[$name] = $value;
 
+        return $this;
+    }
+
+    public function isDisabled()
+    {
+        return $this->disabled;
+    }
+
+    public function setDisabled($bool)
+    {
+        $this->disabled = $bool;
         return $this;
     }
 }
