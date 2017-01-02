@@ -1,7 +1,9 @@
 services:
+
     mbartok_entity_describer.manager:
         class: mbartok\EntityDescriberBundle\Manager\EntityDescriberManager
-    mbartok_entity_describer.twig.entity_describer:
+
+    mbartok_entity_describer.twig.extension:
         class: mbartok\EntityDescriberBundle\Twig\EntityDescriberExtension
         arguments:
             - "@mbartok_entity_describer.manager"
@@ -9,3 +11,6 @@ services:
             - "%mbartok.entity_describer.template%"
         tags:
             - { name: twig.extension }
+
+    mbartok_entity_describer.factory:
+        class: mbartok\EntityDescriberBundle\Factory\ActionFactory

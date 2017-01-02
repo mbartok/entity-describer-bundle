@@ -2,12 +2,12 @@
 
 namespace mbartok\EntityDescriberBundle\Factory;
 
-use mbartok\EntityDescriberBundle\Model\ItemInterface;
+use mbartok\EntityDescriberBundle\Model\ActionInterface;
 
 /**
  * Interface implemented by the factory to create items
  */
-interface ItemFactoryInterface
+interface ActionFactoryInterface
 {
     /**
      * Creates a action item
@@ -15,7 +15,7 @@ interface ItemFactoryInterface
      * @param string $name
      * @param array $options
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
-    public function createItem($name, array $options = array());
+    public function createAction($name, array $options = array());
 }

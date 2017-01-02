@@ -2,7 +2,7 @@
 
 namespace mbartok\EntityDescriberBundle\Factory;
 
-use Knp\Menu\ItemInterface;
+use mbartok\EntityDescriberBundle\Model\ActionInterface;
 
 interface ExtensionInterface
 {
@@ -18,8 +18,8 @@ interface ExtensionInterface
     /**
      * Configures the item with the passed options
      *
-     * @param ItemInterface $item
-     * @param array         $options
+     * @param ActionInterface $item
+     * @param array $options
      */
-    public function buildItem(ItemInterface $item, array $options);
+    public function buildItem(ActionInterface $item, array $options);
 }

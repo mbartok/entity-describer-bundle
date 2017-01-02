@@ -86,7 +86,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         }
         $describer = $this->manager->getDescriberByClass($entity);
         $renderer = $twig->load($this->template);
-        return $renderer->renderBlock('dropdown', array(
+        return $renderer->renderBlock('action_dropdown', array(
             'entity' => $entity,
             'actions' => $describer->getActions($entity)
         ));
@@ -99,7 +99,7 @@ class EntityDescriberExtension extends \Twig_Extension implements \Twig_Extensio
         }
         $describer = $this->manager->getDescriberByClass($entity);
         $renderer = $twig->load($this->template);
-        return $renderer->renderBlock('buttons', array(
+        return $renderer->renderBlock('action_buttons', array(
             'entity' => $entity,
             'actions' => $describer->getActions($entity)
         ));

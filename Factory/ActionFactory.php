@@ -1,14 +1,13 @@
 <?php
 
-namespace Knp\Menu;
+namespace mbartok\EntityDescriberBundle\Factory;
 
-use Knp\Menu\Factory\CoreExtension;
-use Knp\Menu\Factory\ExtensionInterface;
+use mbartok\EntityDescriberBundle\Model\Action;
 
 /**
  * Factory to create a menu from a tree
  */
-class MenuFactory implements FactoryInterface
+class ActionFactory implements ActionFactoryInterface
 {
     /**
      * @var array[]
@@ -25,13 +24,13 @@ class MenuFactory implements FactoryInterface
         $this->addExtension(new CoreExtension(), -10);
     }
 
-    public function createItem($name, array $options = array())
+    public function createAction($name, array $options = array())
     {
         foreach ($this->getExtensions() as $extension) {
             $options = $extension->buildOptions($options);
         }
 
-        $item = new MenuItem($name, $this);
+        $item = new Action($name, $this);
 
         foreach ($this->getExtensions() as $extension) {
             $extension->buildItem($item, $options);
@@ -44,7 +43,7 @@ class MenuFactory implements FactoryInterface
      * Adds a factory extension
      *
      * @param ExtensionInterface $extension
-     * @param integer            $priority
+     * @param integer $priority
      */
     public function addExtension(ExtensionInterface $extension, $priority = 0)
     {

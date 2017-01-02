@@ -2,15 +2,15 @@
 
 namespace mbartok\EntityDescriberBundle\Model;
 
-use mbartok\EntityDescriberBundle\Factory\ItemFactoryInterface;
+use mbartok\EntityDescriberBundle\Factory\ActionFactoryInterface;
 
 /**
  * Default implementation of the ItemInterface
  */
-class Item implements ItemInterface
+class Action implements ActionInterface
 {
     /**
-     * Name of this menu item (used for id by parent menu)
+     * Name of this item (used for id by parent item)
      * @var string
      */
     protected $name = null;
@@ -21,8 +21,14 @@ class Item implements ItemInterface
      */
     protected $label = null;
 
+    /**
+     * @var string
+     */
     protected $routeName = null;
 
+    /**
+     * @var array
+     */
     protected $routeParams = array();
 
     /**
@@ -32,34 +38,16 @@ class Item implements ItemInterface
     protected $linkAttributes = array();
 
     /**
-     * Attributes for the children list
-     * @var array
-     */
-    protected $childrenAttributes = array();
-
-    /**
      * Attributes for the item text
      * @var array
      */
     protected $labelAttributes = array();
 
     /**
-     * Uri to use in the anchor tag
-     * @var string
-     */
-    protected $uri = null;
-
-    /**
      * Attributes for the item
      * @var array
      */
     protected $attributes = array();
-
-    /**
-     * Extra stuff associated to the item
-     * @var array
-     */
-    protected $extras = array();
 
     /**
      * Whether the item is displayed
@@ -75,24 +63,18 @@ class Item implements ItemInterface
 
     /**
      * Child items
-     * @var ItemInterface[]
+     * @var ActionInterface[]
      */
     protected $children = array();
 
     /**
      * Parent item
-     * @var ItemInterface|null
+     * @var ActionInterface|null
      */
     protected $parent = null;
 
     /**
-     * whether the item is current. null means unknown
-     * @var boolean|null
-     */
-    protected $isCurrent = null;
-
-    /**
-     * @var ItemFactoryInterface
+     * @var ActionFactoryInterface
      */
     protected $factory;
 
@@ -101,9 +83,9 @@ class Item implements ItemInterface
      *
      * @param string $name The name of this menu, which is how its parent will
      *                                  reference it. Also used as label if label not specified
-     * @param ItemFactoryInterface $factory
+     * @param ActionFactoryInterface $factory
      */
-    public function __construct($name, ItemFactoryInterface $factory)
+    public function __construct($name, ActionFactoryInterface $factory)
     {
         $this->name = (string)$name;
         $this->factory = $factory;
@@ -112,10 +94,10 @@ class Item implements ItemInterface
     /**
      * setFactory
      *
-     * @param ItemFactoryInterface $factory
+     * @param ActionFactoryInterface $factory
      * @return self
      */
-    public function setFactory(ItemFactoryInterface $factory)
+    public function setFactory(ActionFactoryInterface $factory)
     {
         $this->factory = $factory;
 
@@ -248,8 +230,8 @@ class Item implements ItemInterface
 
     public function addChild($child, array $options = array())
     {
-        if (!$child instanceof ItemInterface) {
-            $child = $this->factory->createItem($child, $options);
+        if (!$child instanceof ActionInterface) {
+            $child = $this->factory->createAction($child, $options);
         } elseif (null !== $child->getParent()) {
             throw new \InvalidArgumentException('Cannot add menu item as child, it already belongs to another menu (e.g. has a parent).');
         }
@@ -313,7 +295,7 @@ class Item implements ItemInterface
         return $this->parent;
     }
 
-    public function setParent(ItemInterface $parent = null)
+    public function setParent(ActionInterface $parent = null)
     {
         if ($parent === $this) {
             throw new \InvalidArgumentException('Item cannot be a child of itself');
@@ -338,7 +320,7 @@ class Item implements ItemInterface
 
     public function removeChild($name)
     {
-        $name = $name instanceof ItemInterface ? $name->getName() : $name;
+        $name = $name instanceof ActionInterface ? $name->getName() : $name;
 
         if (isset($this->children[$name])) {
             // unset the child and reset it so it looks independent
@@ -419,7 +401,7 @@ class Item implements ItemInterface
     /**
      * Implements ArrayAccess
      * @param mixed $name
-     * @return ItemInterface|mixed|null
+     * @return ActionInterface|mixed|null
      */
     public function offsetGet($name)
     {
@@ -430,7 +412,7 @@ class Item implements ItemInterface
      * Implements ArrayAccess
      * @param mixed $name
      * @param mixed $value
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function offsetSet($name, $value)
     {

@@ -24,7 +24,7 @@ interface EntityDescriber
 
     /**
      * @param Describable $entity
-     * @return EntityDescriberAction[]
+     * @return ActionInterface[]
      */
     public function getActions(Describable $entity);
 }

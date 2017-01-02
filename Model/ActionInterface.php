@@ -2,16 +2,16 @@
 
 namespace mbartok\EntityDescriberBundle\Model;
 
-use mbartok\EntityDescriberBundle\Factory\ItemFactoryInterface;
+use mbartok\EntityDescriberBundle\Factory\ActionFactoryInterface;
 
-interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
+interface ActionInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
-     * @param ItemFactoryInterface $factory
+     * @param ActionFactoryInterface $factory
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
-    public function setFactory(ItemFactoryInterface $factory);
+    public function setFactory(ActionFactoryInterface $factory);
 
     /**
      * @return string
@@ -27,7 +27,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name
      *
-     * @return ItemInterface
+     * @return ActionInterface
      *
      * @throws \InvalidArgumentException if the name is already used by a sibling
      */
@@ -42,7 +42,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 
     /**
      * @param $name
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setRouteName($name);
 
@@ -50,7 +50,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
 
     /**
      * @param array $params
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setRouteParams(array $params);
 
@@ -68,7 +68,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $label The text to use when rendering this item
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setLabel($label);
 
@@ -82,7 +82,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $attributes
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setAttributes(array $attributes);
 
@@ -100,7 +100,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $name
      * @param mixed $value
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setAttribute($name, $value);
 
@@ -114,7 +114,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $linkAttributes
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setLinkAttributes(array $linkAttributes);
 
@@ -132,7 +132,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      * @param string $name
      * @param string $value
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setLinkAttribute($name, $value);
 
@@ -150,7 +150,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param boolean $bool
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setDisplayChildren($bool);
 
@@ -168,7 +168,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param boolean $bool
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setDisplay($bool);
 
@@ -177,10 +177,10 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * Returns the child item
      *
-     * @param ItemInterface|string $child An ItemInterface instance or the name of a new item to create
+     * @param ActionInterface|string $child An ItemInterface instance or the name of a new item to create
      * @param array $options If creating a new item, the options passed to the factory for the item
      *
-     * @return ItemInterface
+     * @return ActionInterface
      * @throws \InvalidArgumentException if the item is already in a tree
      */
     public function addChild($child, array $options = array());
@@ -190,7 +190,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param string $name Then name of the child menu to return
      *
-     * @return ItemInterface|null
+     * @return ActionInterface|null
      */
     public function getChild($name);
 
@@ -201,7 +201,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $order New order of children.
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function reorderChildren($order);
 
@@ -217,7 +217,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
     /**
      * Returns the root ItemInterface of this item
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function getRoot();
 
@@ -229,7 +229,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
     public function isRoot();
 
     /**
-     * @return ItemInterface|null
+     * @return ActionInterface|null
      */
     public function getParent();
 
@@ -238,16 +238,16 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * Provides a fluent interface
      *
-     * @param ItemInterface|null $parent
+     * @param ActionInterface|null $parent
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
-    public function setParent(ItemInterface $parent = null);
+    public function setParent(ActionInterface $parent = null);
 
     /**
      * Return the children as an array of ItemInterface objects
      *
-     * @return ItemInterface[]
+     * @return ActionInterface[]
      */
     public function getChildren();
 
@@ -256,7 +256,7 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * @param array $children An array of ItemInterface objects
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function setChildren(array $children);
 
@@ -265,9 +265,9 @@ interface ItemInterface extends \ArrayAccess, \Countable, \IteratorAggregate
      *
      * Provides a fluent interface
      *
-     * @param ItemInterface|string $name The name of ItemInterface instance or the ItemInterface to remove
+     * @param ActionInterface|string $name The name of ItemInterface instance or the ItemInterface to remove
      *
-     * @return ItemInterface
+     * @return ActionInterface
      */
     public function removeChild($name);
 
