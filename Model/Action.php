@@ -392,7 +392,7 @@ class Action implements ActionInterface
 
     public function getRouteName()
     {
-        return $this->getRouteName();
+        return $this->routeName;
     }
 
     public function setRouteName($name)
