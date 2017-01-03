@@ -19,7 +19,7 @@
     "symfony/http-kernel": "^3.2",
     "twig/twig": "^1.30",
     "symfony/routing": "^3.2",
-    "doctrine/common": "^2.7"
+    "doctrine/common": "^2.6"
   },
   "autoload": {
     "psr-4": {
