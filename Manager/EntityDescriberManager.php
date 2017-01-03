@@ -2,15 +2,21 @@
 
 namespace mbartok\EntityDescriberBundle\Manager;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use mbartok\EntityDescriberBundle\Model\Describable;
 use mbartok\EntityDescriberBundle\Model\EntityDescriber;
 
 class EntityDescriberManager
 {
     private $describers;
+    /**
+     * @var ObjectManager
+     */
+    private $objectManager;
 
-    public function __construct()
+    public function __construct(ObjectManager $objectManager)
     {
+        $this->objectManager = $objectManager;
         $this->describers = array();
     }
 
@@ -47,6 +53,10 @@ class EntityDescriberManager
 
     public function getDescriberByClass(Describable $describable)
     {
-        return $this->getDescriberByClassName(get_class($describable));
+        $className = get_class($describable);
+        if ($this->objectManager->getMetadataFactory()->isTransient($className)) {
+            $className = $this->objectManager->getClassMetadata($className)->getName();
+        }
+        return $this->getDescriberByClassName($className);
     }
 }

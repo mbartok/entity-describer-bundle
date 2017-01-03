@@ -2,6 +2,8 @@ services:
 
     mbartok_entity_describer.manager:
         class: mbartok\EntityDescriberBundle\Manager\EntityDescriberManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
 
     mbartok_entity_describer.twig.extension:
         class: mbartok\EntityDescriberBundle\Twig\EntityDescriberExtension
